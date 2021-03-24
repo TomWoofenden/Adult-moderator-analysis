@@ -248,7 +248,9 @@ Data$Alcohol <- as.factor(ifelse(Data$k6190 == 1, 0,
 #################### 5. Create Sample A and Sample B #################### 
 
 # 5.1. Sample A
-SampleA <- Data[Data$CM_PA!='NA' & Data$CM_EA!='NA',]
+
+SampleA <- Data[!is.na(Data$CM_PA) & !is.na(Data$CM_EA), ] 
+
 SampleA <- SampleA[,c('MDD', 
                       'DM',
                      'CM', 
@@ -325,8 +327,10 @@ SampleA_Characteristics <- data.frame(N_A,
 # 5.3. Export sample A characteristics (cohort's descriptive statistics) into a csv file 
 write.csv(SampleA_Characteristics,"~/Documents/VUmc/EarlyCause/MetaAnalyses/PCMmultimorbidity/OutputCohorts/NESDA/NESDA_descriptives_01022021.csv", row.names = TRUE)  #Change path to working directory on your computer and re-name file with cohort's name and date
 
+
 # 5.4. Sample B
-SampleB <- SampleA[SampleA$MDD!='NA' & SampleA$CMD!='NA',]
+SampleB <- SampleA[!is.na(SampleA$MDD) & is.na(SampleA$CMD), ] 
+
 SampleB <- SampleB[,c('MDD', 
                         'CM', 
                         'Age', 
