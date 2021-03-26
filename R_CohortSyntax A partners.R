@@ -254,6 +254,7 @@ Data$Educ <- ifelse(Data$pb312 == 2, 0,
                               ifelse(Data$pb312 == 1, 1, NA))
 
 Data$Educ[Data$pb321 == 1] = 2
+Data$Educ=as.factor(Data$Educ)
 
 # Hours per week spent doing vigorous physical activitiy
 # EW: incomplete or wrong syntax; I assumed Mod and Wal is meant to be the average; please check
@@ -550,6 +551,7 @@ predictors2 <- colnames(mydata2_num)
 mydata2_num <- mydata2_num %>%
   mutate(logit = log(probabilities2/(1-probabilities2))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 ggplot(mydata2_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -584,9 +586,11 @@ predictors3 <- colnames(mydata3_num)
 mydata3_PCM1Age_num <- data.frame(mydata3_num[,'Age']) %>%
   mutate(logit = log(probablities3_PCM1/(1-probablities3_PCM1))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata3_PCM1PhyAct_num <- data.frame(mydata3_num[,'PhyAct']) %>%
   mutate(logit = log(probablities3_PCM1/(1-probablities3_PCM1))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata3_PCM1Alcohol_num <- data.frame(mydata3_num[,'Alcohol']) %>%
   mutate(logit = log(probablities3_PCM1/(1-probablities3_PCM1))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
@@ -594,9 +598,11 @@ mydata3_PCM1Alcohol_num <- data.frame(mydata3_num[,'Alcohol']) %>%
 mydata3_PCM2Age_num <- data.frame(mydata3_num[,'Age']) %>%
   mutate(logit = log(probablities3_PCM2/(1-probablities3_PCM2))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata3_PCM2PhyAct_num <- data.frame(mydata3_num[,'PhyAct']) %>%
   mutate(logit = log(probablities3_PCM2/(1-probablities3_PCM2))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata3_PCM2Alcohol_num <- data.frame(mydata3_num[,'Alcohol']) %>%
   mutate(logit = log(probablities3_PCM2/(1-probablities3_PCM2))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
@@ -604,9 +610,11 @@ mydata3_PCM2Alcohol_num <- data.frame(mydata3_num[,'Alcohol']) %>%
 mydata3_PCM3Age_num <- data.frame(mydata3_num[,'Age']) %>%
   mutate(logit = log(probablities3_PCM3/(1-probablities3_PCM3))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata3_PCM3PhyAct_num <- data.frame(mydata3_num[,'PhyAct']) %>%
   mutate(logit = log(probablities3_PCM3/(1-probablities3_PCM3))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata3_PCM3Alcohol_num <- data.frame(mydata3_num[,'Alcohol']) %>%
   mutate(logit = log(probablities3_PCM3/(1-probablities3_PCM3))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
@@ -617,12 +625,14 @@ ggplot(mydata3_PCM1Age_num, aes(logit, predictor.value))+
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 1, Model #3")                        #Copy paste this graph in the Excel document General_Info_Models.xlsx", under tab "model #3"
+
 ggplot(mydata3_PCM1PhyAct_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="PhyAct per logit, at PCM = 1, Model #3")                     #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #3"
+
 ggplot(mydata3_PCM1Alcohol_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -636,12 +646,14 @@ ggplot(mydata3_PCM2Age_num, aes(logit, predictor.value))+
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 2, Model #3")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #3"
+
 ggplot(mydata3_PCM2PhyAct_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="PhyAct per logit, at PCM = 2, Model #3")                     #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #3"
+
 ggplot(mydata3_PCM2Alcohol_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -655,12 +667,14 @@ ggplot(mydata3_PCM3Age_num, aes(logit, predictor.value))+
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 3, Model #3")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #3"
+
 ggplot(mydata3_PCM3PhyAct_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="PhyAct per logit, at PCM = 3, Model #3")                     #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #3"
+
 ggplot(mydata3_PCM3Alcohol_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -889,9 +903,11 @@ predictors4 <- colnames(mydata4_num)
 mydata4_PCM1Age_num <- data.frame(mydata4_num[,'Age']) %>%
   mutate(logit = log(probablities4_PCM1/(1-probablities4_PCM1))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata4_PCM2Age_num <- data.frame(mydata4_num[,'Age']) %>%
   mutate(logit = log(probablities4_PCM2/(1-probablities4_PCM2))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata4_PCM3Age_num <- data.frame(mydata4_num[,'Age']) %>%
   mutate(logit = log(probablities4_PCM3/(1-probablities4_PCM3))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
@@ -902,12 +918,14 @@ ggplot(mydata4_PCM1Age_num, aes(logit, predictor.value))+
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 1, Model #4")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #4"
+
 ggplot(mydata4_PCM2Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 2, Model #4")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #4"
+
 ggplot(mydata4_PCM3Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -942,9 +960,11 @@ predictors5 <- colnames(mydata5_num)
 mydata5_PCV1Age_num <- data.frame(mydata5_num[,'Age']) %>%
   mutate(logit = log(probablities5_PCV1/(1-probablities5_PCV1))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata5_PCV2Age_num <- data.frame(mydata5_num[,'Age']) %>%
   mutate(logit = log(probablities5_PCV2/(1-probablities5_PCV2))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata5_PCV3Age_num <- data.frame(mydata5_num[,'Age']) %>%
   mutate(logit = log(probablities5_PCV3/(1-probablities5_PCV3))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
@@ -955,12 +975,14 @@ ggplot(mydata5_PCV1Age_num, aes(logit, predictor.value))+
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 1, Model #5")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #5"
+
 ggplot(mydata5_PCV2Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 2, Model #5")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #5"
+
 ggplot(mydata5_PCV3Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -995,9 +1017,11 @@ predictors6 <- colnames(mydata6_num)
 mydata6_PM1Age_num <- data.frame(mydata6_num[,'Age']) %>%
   mutate(logit = log(probablities6_PM1/(1-probablities6_PM1))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata6_PM2Age_num <- data.frame(mydata6_num[,'Age']) %>%
   mutate(logit = log(probablities6_PM2/(1-probablities6_PM2))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata6_PM3Age_num <- data.frame(mydata6_num[,'Age']) %>%
   mutate(logit = log(probablities6_PM3/(1-probablities6_PM3))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
@@ -1008,12 +1032,14 @@ ggplot(mydata6_PM1Age_num, aes(logit, predictor.value))+
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PM = 1, Model #6")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #6"
+
 ggplot(mydata6_PM2Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PM = 2, Model #6")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #6"
+
 ggplot(mydata6_PM3Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -1048,9 +1074,11 @@ predictors7 <- colnames(mydata7_num)
 mydata7_PCM_CD1Age_num <- data.frame(mydata7_num[,'Age']) %>%
   mutate(logit = log(probablities7_PCM_CD1/(1-probablities7_PCM_CD1))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata7_PCM_CD2Age_num <- data.frame(mydata7_num[,'Age']) %>%
   mutate(logit = log(probablities7_PCM_CD2/(1-probablities7_PCM_CD2))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata7_PCM_CD3Age_num <- data.frame(mydata7_num[,'Age']) %>%
   mutate(logit = log(probablities7_PCM_CD3/(1-probablities7_PCM_CD3))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
@@ -1061,12 +1089,14 @@ ggplot(mydata7_PCM_CD1Age_num, aes(logit, predictor.value))+
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM_CD = 1, Model #7")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #7"
+
 ggplot(mydata7_PCM_CD2Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM_CD = 2, Model #7")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #7"
+
 ggplot(mydata7_PCM_CD3Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -1101,9 +1131,11 @@ predictors8 <- colnames(mydata8_num)
 mydata8_PCM_CVD21Age_num <- data.frame(mydata8_num[,'Age']) %>%
   mutate(logit = log(probablities8_PCM_CVD21/(1-probablities8_PCM_CVD21))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata8_PCM_CVD22Age_num <- data.frame(mydata8_num[,'Age']) %>%
   mutate(logit = log(probablities8_PCM_CVD22/(1-probablities8_PCM_CVD22))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata8_PCM_CVD23Age_num <- data.frame(mydata8_num[,'Age']) %>%
   mutate(logit = log(probablities8_PCM_CVD23/(1-probablities8_PCM_CVD23))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
@@ -1114,12 +1146,14 @@ ggplot(mydata8_PCM_CVD21Age_num, aes(logit, predictor.value))+
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM_CVD2 = 1, Model #8")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #8"
+
 ggplot(mydata8_PCM_CVD22Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM_CVD2 = 2, Model #8")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #8"
+
 ggplot(mydata8_PCM_CVD23Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -1154,9 +1188,11 @@ predictors9 <- colnames(mydata9_num)
 mydata9_PCM_med1Age_num <- data.frame(mydata9_num[,'Age']) %>%
   mutate(logit = log(probablities9_PCM_med1/(1-probablities9_PCM_med1))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata9_PCM_med2Age_num <- data.frame(mydata9_num[,'Age']) %>%
   mutate(logit = log(probablities9_PCM_med2/(1-probablities9_PCM_med2))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata9_PCM_med3Age_num <- data.frame(mydata9_num[,'Age']) %>%
   mutate(logit = log(probablities9_PCM_med3/(1-probablities9_PCM_med3))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
@@ -1167,12 +1203,14 @@ ggplot(mydata9_PCM_med1Age_num, aes(logit, predictor.value))+
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM_med = 1, Model #9")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #9"
+
 ggplot(mydata9_PCM_med2Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM_med = 2, Model #9")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #9"
+
 ggplot(mydata9_PCM_med3Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -1207,9 +1245,11 @@ predictors10 <- colnames(mydata10_num)
 mydata10_PCM1Age_num <- data.frame(mydata10_num[,'Age']) %>%
   mutate(logit = log(probablities10_PCM1/(1-probablities10_PCM1))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata10_PCM2Age_num <- data.frame(mydata10_num[,'Age']) %>%
   mutate(logit = log(probablities10_PCM2/(1-probablities10_PCM2))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata10_PCM3Age_num <- data.frame(mydata10_num[,'Age']) %>%
   mutate(logit = log(probablities10_PCM3/(1-probablities10_PCM3))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
@@ -1220,12 +1260,14 @@ ggplot(mydata10_PCM1Age_num, aes(logit, predictor.value))+
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 1, Model #10")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #10"
+
 ggplot(mydata10_PCM2Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 2, Model #10")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #10"
+
 ggplot(mydata10_PCM3Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -1669,9 +1711,11 @@ predictors12 <- colnames(mydata12_num)
 mydata12_PCM1Age_num <- data.frame(mydata12_num[,'Age']) %>%
   mutate(logit = log(probablities12_PCM1/(1-probablities12_PCM1))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata12_PCM2Age_num <- data.frame(mydata12_num[,'Age']) %>%
   mutate(logit = log(probablities12_PCM2/(1-probablities12_PCM2))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata12_PCM3Age_num <- data.frame(mydata12_num[,'Age']) %>%
   mutate(logit = log(probablities12_PCM3/(1-probablities12_PCM3))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
@@ -1682,12 +1726,14 @@ ggplot(mydata12_PCM1Age_num, aes(logit, predictor.value))+
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 1, Model #12")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #12"
+
 ggplot(mydata12_PCM2Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 2, Model #12")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #12"
+
 ggplot(mydata12_PCM3Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -2015,9 +2061,11 @@ predictors13 <- colnames(mydata13_num)
 mydata13_PCM1Age_num <- data.frame(mydata13_num[,'Age']) %>%
   mutate(logit = log(probablities13_PCM1/(1-probablities13_PCM1))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata13_PCM2Age_num <- data.frame(mydata13_num[,'Age']) %>%
   mutate(logit = log(probablities13_PCM2/(1-probablities13_PCM2))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata13_PCM3Age_num <- data.frame(mydata13_num[,'Age']) %>%
   mutate(logit = log(probablities13_PCM3/(1-probablities13_PCM3))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
@@ -2028,12 +2076,14 @@ ggplot(mydata13_PCM1Age_num, aes(logit, predictor.value))+
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 1, Model #13")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #13"
+
 ggplot(mydata13_PCM2Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 2, Model #13")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #13"
+
 ggplot(mydata13_PCM3Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -2067,9 +2117,11 @@ predictors14 <- colnames(mydata14_num)
 mydata14_PCM1Age_num <- data.frame(mydata14_num[,'Age']) %>%
   mutate(logit = log(probablities14_PCM1/(1-probablities14_PCM1))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata14_PCM2Age_num <- data.frame(mydata14_num[,'Age']) %>%
   mutate(logit = log(probablities14_PCM2/(1-probablities14_PCM2))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata14_PCM3Age_num <- data.frame(mydata14_num[,'Age']) %>%
   mutate(logit = log(probablities14_PCM3/(1-probablities14_PCM3))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
@@ -2080,12 +2132,14 @@ ggplot(mydata14_PCM1Age_num, aes(logit, predictor.value))+
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 1, Model #14")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #14"
+
 ggplot(mydata14_PCM2Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 2, Model #14")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #14"
+
 ggplot(mydata14_PCM3Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -2119,9 +2173,11 @@ predictors15 <- colnames(mydata15_num)
 mydata15_PCM1Age_num <- data.frame(mydata15_num[,'Age']) %>%
   mutate(logit = log(probablities15_PCM1/(1-probablities15_PCM1))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata15_PCM2Age_num <- data.frame(mydata15_num[,'Age']) %>%
   mutate(logit = log(probablities15_PCM2/(1-probablities15_PCM2))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata15_PCM3Age_num <- data.frame(mydata15_num[,'Age']) %>%
   mutate(logit = log(probablities15_PCM3/(1-probablities15_PCM3))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
@@ -2132,12 +2188,14 @@ ggplot(mydata15_PCM1Age_num, aes(logit, predictor.value))+
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 1, Model #15")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #15"
+
 ggplot(mydata15_PCM2Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 2, Model #15")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #15"
+
 ggplot(mydata15_PCM3Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -2171,9 +2229,11 @@ predictors16 <- colnames(mydata16_num)
 mydata16_PCM1Age_num <- data.frame(mydata16_num[,'Age']) %>%
   mutate(logit = log(probablities16_PCM1/(1-probablities16_PCM1))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata16_PCM2Age_num <- data.frame(mydata16_num[,'Age']) %>%
   mutate(logit = log(probablities16_PCM2/(1-probablities16_PCM2))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
+
 mydata16_PCM3Age_num <- data.frame(mydata16_num[,'Age']) %>%
   mutate(logit = log(probablities16_PCM3/(1-probablities16_PCM3))) %>%
   gather(key = "predictors", value = "predictor.value", -logit)
@@ -2184,12 +2244,14 @@ ggplot(mydata16_PCM1Age_num, aes(logit, predictor.value))+
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 1, Model #16")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #16"
+
 ggplot(mydata16_PCM2Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
   theme_bw() + 
   facet_wrap(~predictors, scales = "free_y") +
   labs(title="Age per logit, at PCM = 2, Model #16")                        #Copy paste this graph in the Excel document "General_Info_Models.xlsx", under tab "model #16"
+
 ggplot(mydata16_PCM3Age_num, aes(logit, predictor.value))+
   geom_point(size = 0.5, alpha = 0.5) +
   geom_smooth(method = "loess") + 
@@ -2452,7 +2514,7 @@ Stats_model16 <- model16_info(model16)
 write.csv(Stats_model16,"ALSPAC.partner_MODEL16_20210326.csv", row.names = TRUE)  #Change path to working directory on your computer and re-name file with cohort's name and date
 
 
-
+dev.off()
 
 ###################### END ######################
 
